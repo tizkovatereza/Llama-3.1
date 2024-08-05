@@ -30,7 +30,6 @@ Also called tool calling. It allows adding “tools” that the LLM can decide t
 
 The tools usually have a format like this:
 
-(tbd: code snippet)
 ```js
 const tools: Array<Tool> = [
   {
@@ -57,11 +56,31 @@ There is great tutorial by Together AI for function calling with Llama 3.1.
 
 When a LLM lacks a built-in support for function calling, we can still achieve the same result. In such case, we have to instruct the model manually on how to use each “tool” we want to add.
 
+```js
+Generally, you follow these rules:
 
-(tbd: code snippet)
+ALWAYS FORMAT YOUR RESPONSE IN MARKDOWN
+ALWAYS RESPOND ONLY WITH CODE IN CODE BLOCK LIKE THIS:
+```python
+{code}
+```
 
 
-(tbd: code snippet)
+```js
+const codeBlockMatch = responseMessage.match(/```python\n([\s\S]*?)\n```/)
+
+if (codeBlockMatch && codeBlockMatch[1]) {
+  const pythonCode = codeBlockMatch[1]
+  console.log('CODE TO RUN')
+  console.log(pythonCode)
+  const codeInterpreterResults = await codeInterpret(codeInterpreter, pythonCode)
+  return codeInterpreterResults
+} else {
+  console.log('Failed to match any Python code in model\'s response')
+  return []
+}
+```
+
 
 
 
