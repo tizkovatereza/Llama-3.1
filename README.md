@@ -7,7 +7,7 @@ Llama 3.1, the latest release from Meta, is an agentic framework featuring multi
 At this moment, Llama 3.1 is one of the most capable open-source models.
 
 
-In this step-by-step guide, we show how to give it code interpreter capabilities and test it on coding and data analysis tasks.
+In this step-by-step guide, we show how to give it the code interpreter capabilities and test it on coding and data analysis tasks.
 
 
 ## Llama 3.1 function calling
@@ -31,6 +31,25 @@ Also called tool calling. It allows adding “tools” that the LLM can decide t
 The tools usually have a format like this:
 
 (tbd: code snippet)
+```js
+const tools: Array<Tool> = [
+  {
+    name: 'execute_python',
+    description: 'Execute python code in a Jupyter notebook cell and returns any result, stdout, stderr, display_data, and error.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        code: {
+          type: 'string',
+          description: 'The python code to execute in a single cell.'
+        }
+      },
+      required: ['code']
+    }
+  }
+]
+```
+
 
 There is great tutorial by Together AI for function calling with Llama 3.1.
 
