@@ -1,13 +1,13 @@
 # Llama 3.1 with Code Interpreter
 
-## Tutorial for running code with Llama 3.1
+## Guide for running code with Llama 3.1
 
 Llama 3.1, the latest release from Meta, is an agentic framework featuring multi-step reasoning, integrated tool search, and a code interpreter. It comes in three sizes: 8B, 70B, and 405B. The 405B version is the first openly available model by Meta that rivals other top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
 At this moment, Llama 3.1 is one of the most capable open-source models.
 
 
-In this step-by-step guide, we show how to give it the code interpreter capabilities and test it on coding and data analysis tasks.
+In this step-by-step tutorial, we show how to give it the code interpreter capabilities and test it on coding and data analysis tasks.
 
 
 ## Llama 3.1 function calling
