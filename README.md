@@ -4,7 +4,7 @@ Llama 3.1, the latest open-source model by Meta, features multi-step reasoning, 
 
 In this post, we will look closer at the code generation and code execution capabilities of Llama 3.1. We will give a step-by-step tutorial for securely running the LLM-generated code with E2B, in a Python or vaScript/TypeScript version.
 
-## How to run code with Llama 3.1
+## Approaches to run code with Llama 3.1
 
 Similar to other LLMs (e.g., GPT or Claude), there are two different options to generate code with Llama 3.1. You can utilize the built-in function calling support, or you can add your own way to handle code generation.
 
