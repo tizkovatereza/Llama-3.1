@@ -8,7 +8,7 @@ In this post, we will look closer to its code execution capabilities and provide
 
 I tested two options to run code with Llama 3.1.
 
-### 1. The built-in function calling.
+### 1. Built-in function calling
 This approach is native for Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
 
 The tools use tool definitions via JSON schemas, usually looking like this:
@@ -33,8 +33,6 @@ const tools: Array<Tool> = [
 ```
 
 
-There is great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for function calling with Llama 3.1.
-
 
 Llama 3.1 also offers built-in tools:
 
@@ -46,26 +44,10 @@ This means that the LLM has been fine-tuned to more accurately make use of these
 
 Even though Llama 3.1 supports the tool calling, I have struggled with it while generating bigger pieces of code. The model often stopped the generation before completing the code.
    
-### 2. Adding the code interpreter by E2B
-In this approach, you instruct Llama 3.1 to return just a plain markdown code blocks that are parsed for the code interpreter. 
+### 2. Manually parsing the code
+In this approach, we instruct Llama 3.1 to return just plain markdown code blocks that are "manually" parsed for the code interpreter. 
 
-
-I don't have data for evaluating which option is better, but in this guide, we will show the second one. The reason is, it is applicable more universally, regardless of whether the particular LLM supports function calling.
-
-
-## Different types of LLM code generation
-
-The function calling feature is not automatic for LLMs. 
-
-### A) Function calling
-Also called tool calling. It allows adding “tools” that the LLM can decide to call. It uses tool definitions via JSON schemas.
-
-
-
-
-### B) “Manual” parsing of code
-
-When a LLM lacks a built-in support for function calling, we can still achieve the same result. In such case, we have to instruct the model manually on how to use each “tool” we want to add.
+When a LLM lacks built-in support for function calling, we can still achieve the same result. In such a case, we can instruct the model manually on how to use each “tool” we want to add. In the system prompt, we instruct the model to return a response in the correct format:
 
 ```js
 Generally, you follow these rules:
@@ -76,6 +58,7 @@ ALWAYS RESPOND ONLY WITH CODE IN CODE BLOCK LIKE THIS:
 {code}
 ```
 
+And later in the code, we need to specify parsing of the code for the code interpreter we will use to run the code:
 
 ```js
 const codeBlockMatch = responseMessage.match(/```python\n([\s\S]*?)\n```/)
@@ -92,33 +75,34 @@ if (codeBlockMatch && codeBlockMatch[1]) {
 }
 ```
 
+This approach might seem more difficult, but this approach is more universal and applicable beyond Llama 3.1, regardless of whether the particular LLM supports function calling.
+
+I don't have data to evaluate which of the two options is better. In this guide, we will show the second approach with the e2b Code Interpreter SDK. If you are interested in the first approach, there is a great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for the native function calling with Llama 3.1. In this tutorial, we will explore this approach, showing an example in JavaScript/TypeScript and Python version.
+
+## Code intepreting with Llama 3.1 and E2B Code Interpreter SDK
+
+We will show how to build a code interpreter with Llama 3 on Together AI, and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
+
+The Code Interpreter SDK works for both approaches we mentioned (built-in function calling or manually parsing the code). It is used to execute the AI-generated code, regardless of what approach and what LLM was used to provide the code.
+
+![image](https://github.com/user-attachments/assets/31084c43-d312-49fb-b37f-722440f05d51)
 
 
-
-LLM code interpreting with Llama 3.1
-Generating the correct code is one thing, but running the code is another. To immediately execute (and hence test) the code provided by Llama 3.1, we can use the Code Interpreter SDK.
-
-
-
-
+## Key links
+- [Get started with E2B](https://e2b.dev/docs)
+- [Get started with Llama](https://llama.meta.com/)
+- [Get started with Together AI](https://www.together.ai/)
+- [Follow E2B](https://x.com/e2b_dev)
 
 
-Get full code
-We have a full code on GitHub.
-Code Interpreter SDK
-We will show how to build a code interpreter with Llama 3 on Groq, and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
-Key links
-Get started with E2B
-Get started with Llama
-Get started with Groq
-Follow E2B
-
-
-Overview
-Prerequisites
-
-
-
+## Outline
+1. Prerequisites
+2. Install the SDKs
+3. Set up the API keys and model instructions
+4. Add code interpreting capabilities and initialize the model
+5. Upload the dataset
+6. Put everything together
+7. Run the program and see the results
 
 
 
@@ -488,7 +472,7 @@ def chat_with_llm(e2b_code_interpreter, user_message):
         return []
 ```
 
-### 6. Upload the dataset
+### 5. Upload the dataset
 
 The CSV data is uploaded programmatically, not via AI-generated code. The code interpreter by E2B runs inside the E2B sandbox. Read more about the file upload [here](https://e2b.dev/docs/sandbox/api/upload).
 
@@ -544,7 +528,7 @@ def upload_dataset(code_interpreter):
         raise error
 ```
 
-### 7. Put everything together
+### 6. Put everything together
 
 Finally we put everything together and let the AI assistant upload the data, run an analysis, and generate a PNG file with a chart. 
 You can update the task for the assistant in this step. If you decide to change the CSV file you are using, don't forget to update the prompt too.
@@ -615,7 +599,7 @@ first_result
 ```
 
 
-### 8. Run the program and see the results
+### 7. Run the program and see the results
 
 In the JS & TS version the resulting chart is saved to the same directory as a PNG file. In the Python version, the file is generated within the notebook. The plot shows the linear regression of the relationship between GDP per capita and life expectancy from the CSV data.
 
