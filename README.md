@@ -1,32 +1,15 @@
 # Llama 3.1 with Code Interpreter
 
-## Guide for running code with Llama 3.1
+## How to run code with Llama 3.1
 
-Llama 3.1, the latest release from Meta, is an agentic framework featuring multi-step reasoning, integrated tool search, and a code interpreter. It comes in three sizes: 8B, 70B, and 405B. The 405B version is the first openly available model by Meta that rivals other top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
+Llama 3.1, the latest release from Meta, is an open-source model featuring multi-step reasoning, integrated tool search, and a code interpreter. It comes in three sizes: 8B, 70B, and 405B. The 405B version is the first openly available model by Meta that rivals other top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
-At this moment, Llama 3.1 is one of the most capable open-source models.
+In this post, we will look closer to its code execution capabilities and provide a step-by-step tutorial for securely running code with Llama 3.1. We will test it on coding and data analysis tasks.
 
+I tested two options to run code with Llama 3.1.
 
-In this step-by-step tutorial, we show how to give it the code interpreter capabilities and test it on coding and data analysis tasks.
-
-
-## Llama 3.1 function calling
-Now, Llama 3.1 natively supports function calling.
-
-The Llama 3.1 family of models has “Built-In Tools” for function calling, in particular
-
-Brave Search used to perform web searches.
-Wolfram Alpha used to perform complex mathematical calculations.
-Code Interpreter used to evaluate the generated Python code.
-
-Built-in support only means that the models are better trained at triggering the use of these functions. The functions still need to be implemented locally, for which you can follow the tutorial.
-
-## Different types of LLM code generation
-
-The function calling feature is not automatic for LLMs. 
-
-### A) Function calling
-Also called tool calling. It allows adding “tools” that the LLM can decide to call. It uses tool definitions via JSON schemas.
+### 1. The built-in function calling.
+This approach is native for Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call. It uses tool definitions via JSON schemas.
 
 The tools usually have a format like this:
 
@@ -50,7 +33,35 @@ const tools: Array<Tool> = [
 ```
 
 
-There is great tutorial by Together AI for function calling with Llama 3.1.
+There is great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for function calling with Llama 3.1.
+
+
+Llama 3.1 also offers built-in tools:
+
+- Brave Search used to perform web searches.
+- Wolfram Alpha used to perform complex mathematical calculations.
+- Code Interpreter used to evaluate the generated Python code.
+
+This means that the LLM has been fine-tuned to more accurately make use of these functions, but you are still in charge of making a implementing them.
+
+Even though Llama 3.1 supports the tool calling, I have struggled with it while generating bigger pieces of code. The model often stopped the generation before completing the code.
+   
+### 2. Adding the code interpreter by E2B
+In this approach, you instruct Llama 3.1 to return just a plain markdown code blocks that are parsed for the code interpreter. 
+
+
+I don't have data for evaluating which option is better, but in this guide, we will show the second one. The reason is, it is applicable more universally, regardless of whether the particular LLM supports function calling.
+
+
+## Different types of LLM code generation
+
+The function calling feature is not automatic for LLMs. 
+
+### A) Function calling
+Also called tool calling. It allows adding “tools” that the LLM can decide to call. It uses tool definitions via JSON schemas.
+
+
+
 
 ### B) “Manual” parsing of code
 
