@@ -4,12 +4,12 @@
 
 Llama 3.1, the latest release from Meta, is an open-source model featuring multi-step reasoning, integrated tool search, and a code interpreter. It comes in three sizes: 8B, 70B, and 405B. The 405B version is the first openly available model by Meta that rivals other top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
-In this post, we will look closer to its code execution capabilities and provide a step-by-step tutorial for securely running code with Llama 3.1. We will test it on coding and data analysis tasks.
+In this post, we will look closer at its code execution capabilities and provide a step-by-step tutorial for securely running code with Llama 3.1. We will test it on coding and data analysis tasks.
 
-I tested two options to run code with Llama 3.1.
+I tested two different options to run code with Llama 3.1.
 
 ### 1. Built-in function calling
-This approach is native for Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
+This approach is native to Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
 
 The tools use tool definitions via JSON schemas, usually looking like this:
 
@@ -77,11 +77,14 @@ if (codeBlockMatch && codeBlockMatch[1]) {
 
 This approach might seem more difficult, but this approach is more universal and applicable beyond Llama 3.1, regardless of whether the particular LLM supports function calling.
 
-I don't have data to evaluate which of the two options is better. In this guide, we will show the second approach with the e2b Code Interpreter SDK. If you are interested in the first approach, there is a great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for the native function calling with Llama 3.1. In this tutorial, we will explore this approach, showing an example in JavaScript/TypeScript and Python version.
+I don't have data to evaluate which of the two options is better.
+
+In this guide, we will show the second approach with the e2b Code Interpreter SDK. If you are interested in the first approach, there is a great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for the native function calling with Llama 3.1. In this tutorial, we will explore this approach, showing an example in JavaScript/TypeScript and Python version.
+
 
 ## Code intepreting with Llama 3.1 and E2B Code Interpreter SDK
 
-We will show how to build a code interpreter with Llama 3 on Together AI, and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
+We will show how to build a code interpreter with Llama 3 on Together AI and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
 
 The Code Interpreter SDK works for both approaches we mentioned (built-in function calling or manually parsing the code). It is used to execute the AI-generated code, regardless of what approach and what LLM was used to provide the code.
 
