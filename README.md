@@ -30,7 +30,7 @@ const tools: Array<Tool> = [
 ]
 ```
 
-It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The tools can serve to various use cases, from searching the internet to running the generated code. They often include API calls to third-party apps.
+It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. Function calling doesn't necessarily imply code execution capabilities, but Llama 3.1 has code interpreter as one of the built-in tools. In general, the tools can serve to various use cases, from searching the internet to running the generated code. They often include API calls to third-party apps.
 
 Llama 3.1 also offers built-in tools:
 
