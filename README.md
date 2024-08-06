@@ -2,11 +2,11 @@
 
 ## How to run code with Llama 3.1
 
-Llama 3.1, the latest release from Meta, is an open-source model featuring multi-step reasoning, integrated tool search, and a code interpreter. It comes in three sizes: 8B, 70B, and 405B. The 405B version is the first openly available model by Meta that rivals other top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
+Llama 3.1, the latest open-source model by Meta, features multi-step reasoning, integrated tool search, and a code interpreter. The LLM comes in three sizes: 8B, 70B, and 405B. Especially in the 405B version, Llama 3.1 challenges top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
-In this post, we will look closer at its code execution capabilities and provide a step-by-step tutorial for securely running code with Llama 3.1. We will test it on coding and data analysis tasks.
+In this post, we will look closer at its code generation and code execution capabilities and provide a step-by-step tutorial for securely running code with Llama 3.1. We provide Python and JavaScript/TypeScript version.
 
-I tested two different options to run code with Llama 3.1.
+There are two different options to generate code with Llama 3.1
 
 ### 1. Built-in function calling
 This approach is native to Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
@@ -85,6 +85,8 @@ In case you are interested in the first approach, there is a great [tutorial by 
 
 
 ## Code intepreting with Llama 3.1 and E2B Code Interpreter SDK
+
+### [Full code](https://github.com/e2b-dev/e2b-cookbook/tree/main/examples/together-ai-with-code-interpreting)
 
 We will show how to build a code interpreter with Llama 3 on Together AI and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
 
@@ -699,7 +701,7 @@ Running code interpreter...
 ![image](https://github.com/user-attachments/assets/392a9c6a-9e26-4408-bcc6-b8c324ca92a4)
 
 
-
+### [Full code](https://github.com/e2b-dev/e2b-cookbook/tree/main/examples/together-ai-with-code-interpreting)
 
 ## Resources
 - [Code Interpreter SDK](https://github.com/e2b-dev/code-interpreter)
