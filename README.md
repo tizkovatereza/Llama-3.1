@@ -9,9 +9,9 @@ In this post, we will look closer to its code execution capabilities and provide
 I tested two options to run code with Llama 3.1.
 
 ### 1. The built-in function calling.
-This approach is native for Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call. It uses tool definitions via JSON schemas.
+This approach is native for Llama 3.1 and easy to implement. It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
 
-The tools usually have a format like this:
+The tools use tool definitions via JSON schemas, usually looking like this:
 
 ```js
 const tools: Array<Tool> = [
