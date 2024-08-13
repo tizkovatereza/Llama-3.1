@@ -1,4 +1,4 @@
-# Llama 3.1 with Code Interpreter
+# Llama 3.1 with Code Interpreter in Together AI
 
 Llama 3.1, the latest open-source model by Meta, features multi-step reasoning, integrated tool search, and a code interpreter. The LLM comes in three sizes: 8B, 70B, and 405B. Especially in the 405B version, Llama 3.1 challenges top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
