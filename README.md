@@ -2,7 +2,7 @@
 
 Llama 3.1, the latest open-source model by Meta, features multi-step reasoning, integrated tool search, and a code interpreter. The LLM comes in three sizes: 8B, 70B, and 405B. Especially in the 405B version, Llama 3.1 challenges top LLMs in areas like general knowledge, math, tool use, and multilingual translation.
 
-In this post, we will look closer at the code generation and code execution capabilities of Llama 3.1. We will give a step-by-step tutorial for securely running the LLM-generated code with E2B, in a Python or vaScript/TypeScript version.
+In this post, we will look closer at the code generation and code execution capabilities of Llama 3.1. We will give a step-by-step tutorial for securely running the LLM-generated code with E2B, in a Python or JavaScript/TypeScript version.
 
 ## Approaches to run code with Llama 3.1
 
