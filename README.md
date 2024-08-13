@@ -9,26 +9,9 @@ In this post, we will look closer at the code generation and code execution capa
 Similar to other LLMs (e.g., GPT or Claude), there are two different options to generate code with Llama 3.1. You can utilize the built-in function calling support (if your LLM provider supports that), or you can add your own way to handle code generation.
 
 ### 1. Built-in function calling
-This approach is native to Llama 3.1 and easy to use. The function calling means that you are allowed to add “tools” that the LLM can decide to call. The tools use tool definitions via JSON schemas, usually looking like this:
+This approach is native to Llama 3.1 and easy to use. The function calling means that you are allowed to add “tools” that the LLM can decide to call.
 
-```js
-const tools: Array<Tool> = [
-  {
-    name: 'execute_python',
-    description: 'Execute python code in a Jupyter notebook cell and returns any result, stdout, stderr, display_data, and error.',
-    input_schema: {
-      type: 'object',
-      properties: {
-        code: {
-          type: 'string',
-          description: 'The python code to execute in a single cell.'
-        }
-      },
-      required: ['code']
-    }
-  }
-]
-```
+The tools are usually defined in JSON, detailing their name, description, and the necessary input schema required to execute Python code in a Jupyter notebook environment.
 
 It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. Function calling doesn't necessarily imply code execution capabilities. Llama 3.1 models are trained to identify prompts that can be answered with their built-in code interpreter tool and provide the ppropriate Python function calls to achieve the result. You still have to make an implementation that produces valid results for the given query.
 
