@@ -46,7 +46,8 @@ In case you are interested in the first approach, there is a great [tutorial by 
 
 ### [Full code](https://github.com/e2b-dev/e2b-cookbook/tree/main/examples/together-ai-with-code-interpreting)
 
-We will show how to build a code interpreter with Llama 3.1 on Together AI and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
+We will show how to build an AI assistant that analyzes a CSV file with socioeconomic data, runs code to analyze them, and generates a chart as a result.
+The assistant will be powered by Llama 3.1 on Together AI and using the open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
 
 The Code Interpreter SDK works for both approaches we mentioned (built-in function calling or manually parsing the code). It is used to execute the AI-generated code, regardless of what approach and what LLM was used to provide the code.
 
