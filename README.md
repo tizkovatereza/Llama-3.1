@@ -30,9 +30,11 @@ const tools: Array<Tool> = [
 ]
 ```
 
-It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. Function calling doesn't necessarily imply code execution capabilities, but Llama 3.1 has code interpreter as one of the built-in tools. In general, the tools can serve various use cases, from searching the internet to running the generated code. They often include API calls to third-party apps.
+It is recommended to pick 70B or 405B if you want to have a full conversation with function calling. Function calling doesn't necessarily imply code execution capabilities. Llama 3.1 models are trained to identify prompts that can be answered with their built-in code interpreter tool and provide the ppropriate Python function calls to achieve the result. You still have to make an implementation that produces valid results for the given query.
 
-Llama 3.1 also offers built-in tools:
+In general, the tools can serve various use cases, from searching the internet to running the generated code. They often include API calls to third-party apps.
+
+Llama 3.1 also offers [built-in tools](https://llama.meta.com/docs/model-cards-and-prompt-formats/llama3_1/#built-in-tooling):
 
 - Brave Search used to perform web searches.
 - Wolfram Alpha used to perform complex mathematical calculations.
@@ -65,8 +67,8 @@ const codeBlockMatch = responseMessage.match(/```python\n([\s\S]*?)\n```/)
 
 if (codeBlockMatch && codeBlockMatch[1]) {
   const pythonCode = codeBlockMatch[1]
-  console.log('CODE TO RUN')
-  console.log(pythonCode)
+  console.log('Code to run, pythonCode)
+
   const codeInterpreterResults = await codeInterpret(codeInterpreter, pythonCode)
   return codeInterpreterResults
 } else {
