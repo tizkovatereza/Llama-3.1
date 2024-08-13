@@ -83,11 +83,11 @@ In this guide, we will demonstrate an example of the second approach.
 In case you are interested in the first approach, there is a great [tutorial by Together AI](https://docs.together.ai/docs/llama-3-function-calling) for the native function calling with Llama 3.1.
 
 
-## Code intepreting with Llama 3.1 and E2B Code Interpreter SDK
+## Code interpreting with Llama 3.1 and E2B Code Interpreter SDK
 
 ### [Full code](https://github.com/e2b-dev/e2b-cookbook/tree/main/examples/together-ai-with-code-interpreting)
 
-We will show how to build a code interpreter with Llama 3 on Together AI and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
+We will show how to build a code interpreter with Llama 3.1 on Together AI and powered by open-source Code Interpreter SDK by E2B. The E2B Code Interpreter SDK quickly creates a secure cloud sandbox powered by Firecracker. Inside this sandbox is a running Jupyter server that the LLM can use.
 
 The Code Interpreter SDK works for both approaches we mentioned (built-in function calling or manually parsing the code). It is used to execute the AI-generated code, regardless of what approach and what LLM was used to provide the code.
 
@@ -124,7 +124,7 @@ TOGETHER_API_KEY = ""
 E2B_API_KEY = ""
 ```
 
-In the latter case, create just `main.ipynb` file.
+In the latter case, create just a `main.ipynb` file.
 
 Get the E2B API key [here](https://e2b.dev/docs/getting-started/api-key) and the Together AI API key [here](https://api.together.xyz/settings/api-keys).
 
@@ -151,7 +151,8 @@ pip install together==0.6.0 e2b-code-interpreter==0.0.10 dotenv==1.0.0
 In this step you upload your E2B and Together API keys to the program. In the JS & TS case, the API keys are stored in the `.env` file, in the Python case, they are added directly to the notebook.
 You pick the model of your choice by uncommenting it. There are some recommended models that are great at code generation, but you can add a different one from [here](https://api.together.ai/models).
 
-The model is assigned a data scientist role and explained the uploaded CSV. You can choose different data but need to update the instructions accordingly.
+The model is assigned a data scientist role and explained the uploaded CSV. If you use your custom CSV file, don’t forget to update the system prompt accordingly.
+
    
 1️⃣ JavaScript & TypeScript version:
 
