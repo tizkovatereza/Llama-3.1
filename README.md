@@ -32,33 +32,7 @@ Even though Llama 3.1 supports the tool calling, I have struggled with it while 
 When a LLM lacks built-in support for function calling, we can still achieve the same result. In this approach, we instruct Llama 3.1 to return just plain markdown code blocks that we manually parse and pass to the code interpreter. 
 We instruct the model on how to generate code in a suitable format, and we programmatically add a way to parse the code and have it prepared for running.
 
-In the system prompt, we instruct the model to return a code response in the correct format:
-
-```js
-Generally, you follow these rules:
-
-ALWAYS FORMAT YOUR RESPONSE IN MARKDOWN
-ALWAYS RESPOND ONLY WITH CODE IN CODE BLOCK LIKE THIS:
-```python
-{code}
-```
-
-And later in the code, we need to specify parsing of the code for the code interpreter we will use to run the code:
-
-```js
-const codeBlockMatch = responseMessage.match(/```python\n([\s\S]*?)\n```/)
-
-if (codeBlockMatch && codeBlockMatch[1]) {
-  const pythonCode = codeBlockMatch[1]
-  console.log('Code to run, pythonCode)
-
-  const codeInterpreterResults = await codeInterpret(codeInterpreter, pythonCode)
-  return codeInterpreterResults
-} else {
-  console.log('Failed to match any Python code in model\'s response')
-  return []
-}
-```
+In the system prompt, we prompt the model to return a code response that matches the desired format. That means an output formatted correctly in Markdown with Python code blocks. We need to also specify the parsing of the code for the code interpreter we will use to run the code.
 
 This approach might seem more difficult, but it is more universal and applicable beyond Llama 3.1, regardless of whether the particular LLM supports function calling.
 
