@@ -34,7 +34,7 @@ It is recommended to pick 70B or 405B if you want to have a full conversation wi
 
 In general, the tools can serve various use cases, from searching the internet to running the generated code. They often include API calls to third-party apps.
 
-Llama 3.1 also offers [built-in tools](https://llama.meta.com/docs/model-cards-and-prompt-formats/llama3_1/#built-in-tooling):
+Llama 3.1 also offers [built-in support for tools](https://llama.meta.com/docs/model-cards-and-prompt-formats/llama3_1/#built-in-tooling):
 
 - Brave Search used to perform web searches.
 - Wolfram Alpha used to perform complex mathematical calculations.
@@ -150,7 +150,7 @@ pip install together==0.6.0 e2b-code-interpreter==0.0.10 dotenv==1.0.0
 ```
 
 ### 3. Set up the API keys and model instructions.
-In this step you upload your E2B and Together API keys to the program. In the JS & TS case, the API keys are stored in the `.env` file, in the Python case, they are added directly to the notebook.
+In this step we set up the E2B and Together API keys. In the JS & TS case, the API keys are stored in the `.env` file, in the Python case, they are added directly to the notebook.
 You pick the model of your choice by uncommenting it. There are some recommended models that are great at code generation, but you can add a different one from [here](https://api.together.ai/models).
 
 The model is assigned a data scientist role and explained the uploaded CSV. If you use your custom CSV file, don’t forget to update the system prompt accordingly.
